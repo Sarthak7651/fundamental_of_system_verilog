@@ -19,3 +19,5 @@ module array;
       $display ("value of all element of arr2 : %0p",arr2);
     end
 endmodule
+
+/*if u want to declare a null array like arr2[]; only without initialize it want to update that array it show error*/
