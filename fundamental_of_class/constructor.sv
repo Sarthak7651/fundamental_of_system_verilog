@@ -3,7 +3,7 @@ class first;
   bit [2:0] data2;
 endclass
 
-/*u u should creat not access clas just by handler u should create constructor */
+/*u can not access clas just by handler u should create constructor */
 
 module tb;
   first f;
