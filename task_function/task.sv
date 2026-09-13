@@ -1,3 +1,15 @@
+/*
+
+| Type           | Example                                 | Use                                                            |
+| -------------- | --------------------------------------- | -------------------------------------------------------------- |
+| No arguments   | `task add();                            | When task directly uses testbench variables                    |
+| With arguments | `task add(input a, input b, output y);  | When you want the task to be reusable with different variables |
+
+SystemVerilog tasks can have input, output, and inout arguments, but they are optional. A task can also access variables 
+declared in its surrounding scope.
+*/
+
+
 module tb;
 
   bit [3:0] a;
