@@ -4,31 +4,30 @@ In SystemVerilog, an **event** is used for synchronization between different pro
 
 For example:
 
-```systemverilog
+systemverilog
 event a1;
-```
+
 
 Here, `a1` is an event. When we write:
 
-```systemverilog
+systemverilog
 -> a1;
-```
+
 
 the event `a1` is triggered.
 
 ## Using `@(event)`
 
-```systemverilog
+systemverilog
 @(a1);
-```
 
 means **wait for the next trigger of event `a1`**.
 
 For example, if one process is already waiting using `@(a1)` and another process executes:
 
-```systemverilog
+systemverilog
 -> a1;
-```
+
 
 the waiting process detects the event and continues execution.
 
@@ -40,9 +39,9 @@ A simple way to remember this is:
 
 ## Using `wait(event.triggered)`
 
-```systemverilog
+systemverilog
 wait(a1.triggered);
-```
+
 
 checks whether event `a1` has been triggered in the current simulation time slot.
 
@@ -56,7 +55,7 @@ A simple way to remember this is:
 
 Consider:
 
-```systemverilog
+systemverilog
 module tb;
 
     event a1;
@@ -71,15 +70,15 @@ module tb;
     end
 
 endmodule
-```
+
 
 Here, `a1` may be triggered before the second process reaches `@(a1)`. In that case, the second process can miss the event and wait indefinitely for another trigger.
 
 Using:
 
-```systemverilog
+systemverilog
 wait(a1.triggered);
-```
+
 
 can avoid this type of same-time-slot race condition.
 
