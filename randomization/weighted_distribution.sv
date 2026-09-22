@@ -37,7 +37,7 @@ module tb;
 first f;
 initial begin
 f=new();
-for(int i =0;i<10;i=i+1) begin
+for(int i=0;i<10;i=i+1) begin
 f.randomize();
 $display("value of wr:%0d an rd:%0d",f.wr,f.rd);
 end
@@ -53,8 +53,8 @@ rand bit [1:0] var1;
 rand bit [1:0] var2;
 
 constraint data {
-wr dist { 0 := 30 , [1:3] := 90};
-rd dist { 0 :/30 , [1:3] :/ 90};
+var1 dist { 0 := 30 , [1:3] := 90};
+var2 dist { 0 :/30 , [1:3] :/ 90};
 }
 
 constraint cntrl {
@@ -70,6 +70,7 @@ f=new();
 for(int i =0;i<10;i=i+1) begin
 f.randomize();
 $display("value of var1(:=):%0d an var2(:/):%0d",f.var1,f.var2);
+//$display("value of wr(:=):%0d an rd(:/):%0d",f.wr,f.rd);
 end
 end
 endmodule
