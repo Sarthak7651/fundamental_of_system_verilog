@@ -88,6 +88,8 @@ module tb;
 
 endmodule
 
+/*in the exampe above,all signal are accessible by both modules,which can lead to accidental driver conflict.to enforce directional rules
+(who input and who output) we use modport (module port).*/
 
 //interface modport
 interface handshake_if (input bit clk);
@@ -103,3 +105,10 @@ interface handshake_if (input bit clk);
     input clk,valid,data,
     output ready );
 endinterface
+
+/*
+interface :- the keyword used to define th ebundle of signal.
+modport :- restrict signal direction inside the interface for specific modules.
+clocking :- sync tb signal to a clock to avoid simulation race condition.
+virtual interface :- a pointer to an interface used in oop-based verification (like uvm) to allow classes to talk to hardware wires.
+*/
