@@ -1,3 +1,8 @@
+/*
+-interface with all reg type,we are not allowed to connect variables in interface to the output port of dut.
+-interface with all wire type,we are not allowed to apply stimulus using initial or always block.
+*/
+
 //design code
 module add(
 input [3:0] a,b,
