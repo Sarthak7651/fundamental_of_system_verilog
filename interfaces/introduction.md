@@ -84,4 +84,123 @@ This makes large designs easier to maintain.
 
 The same interface can be used by different components of the design and verification environment.
 
-For e
+For example:
+
+```text
+                    SPI Interface
+                         |
+          +--------------+--------------+
+          |              |              |
+     SPI Master       Monitor        Driver
+          |              |              |
+          +--------------+--------------+
+```
+
+The interface can be shared between:
+
+* Design modules
+* Testbench
+* Drivers
+* Monitors
+* Verification components
+
+This reduces duplicate signal declarations and simplifies connections.
+
+---
+
+### 4. Modports
+
+**Modports** define how different modules or verification components are allowed to access the signals in an interface.
+
+For example:
+
+```systemverilog
+interface spi_if;
+
+    logic clk;
+    logic rst_n;
+    logic mosi;
+    logic miso;
+    logic sclk;
+    logic ss_n;
+
+    modport master (
+        input  clk,
+        input  rst_n,
+        output mosi,
+        input  miso,
+        output sclk,
+        output ss_n
+    );
+
+    modport slave (
+        input  clk,
+        input  rst_n,
+        input  mosi,
+        output miso,
+        input  sclk,
+        input  ss_n
+    );
+
+endinterface
+```
+
+Here, the **same interface** is used by both the master and slave, but each sees the appropriate signal directions through its modport.
+
+---
+
+## Simple Concept
+
+Without an interface:
+
+```text
+Module A
+   |
+   +--- clk
+   +--- rst
+   +--- data
+   +--- valid
+   +--- ready
+   +--- ...
+   |
+   Module B
+```
+
+With an interface:
+
+```text
+Module A
+    |
+    |
++-----------+
+| Interface |
+|-----------|
+| clk       |
+| rst       |
+| data      |
+| valid     |
+| ready     |
+| ...       |
++-----------+
+    |
+    |
+Module B
+```
+
+The interface acts as a **communication bundle** between the components.
+
+---
+
+## Interview Point
+
+> **A SystemVerilog interface is a construct that encapsulates and groups related signals used for communication between design and verification components. It improves encapsulation, maintainability, and reusability, while modports provide different access directions for different components.**
+
+### Quick Revision
+
+| Feature             | Purpose                                                     |
+| ------------------- | ----------------------------------------------------------- |
+| **Interface**       | Groups related signals                                      |
+| **Encapsulation**   | Keeps communication signals together                        |
+| **Maintainability** | Simplifies changes to bus signals                           |
+| **Reusability**     | Allows the same interface to be used by multiple components |
+| **Modport**         | Defines signal directions/access for different components   |
